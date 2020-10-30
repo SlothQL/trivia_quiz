@@ -26,13 +26,23 @@ function App() {
   }, [query]);
 
   const displayIncorrectAnswers = (answer) => {
-    const newLocal = (
+    const incorrectAnswer = (
       <div>
         <input type="radio" id="incorrect_answers" name="answers" value="incorrect_answers"></input>
         <label htmlFor="incorrect_answers">{answer}</label>
       </div>
       );
-    return newLocal;
+    return incorrectAnswer;
+  }
+
+  const displayCorrectAnswer = (question) => {
+    const correctAnswer = (
+      <div>
+        <input type="radio" id="correct_answer" name="answers" value="correct_answer"></input>
+        <label htmlFor="correct_answer">{question.correct_answer}</label>
+      </div>
+    );
+    return correctAnswer;
   }
 
   const renderAllQuestions = () => {
@@ -40,8 +50,7 @@ function App() {
       <li key={index}>
         <p>{question.question}</p><br></br>
         <p>Answers:</p><br></br>
-        <input type="radio" id="correct_answer" name="answers" value="correct_answer"></input>
-        <label htmlFor="correct_answer">{question.correct_answer}</label>
+        {displayCorrectAnswer(question)}
         {question.incorrect_answers.map((answer, index) => (
           displayIncorrectAnswers(answer)
         ))}
@@ -53,6 +62,11 @@ function App() {
     return searchResult.map((question, index) => (
       <li key={index}>
         <p>{question.question}</p>
+        <p>Answers:</p><br></br>
+        {displayCorrectAnswer(question)}
+        {question.incorrect_answers.map((answer, index) => (
+          displayIncorrectAnswers(answer)
+        ))}
       </li>
     ))
   }
