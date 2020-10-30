@@ -25,10 +25,26 @@ function App() {
     setSearchResult(filteredData);
   }, [query]);
 
+  const displayIncorrectAnswers = (answer) => {
+    const newLocal = (
+      <div>
+        <input type="radio" id="incorrect_answers" name="answers" value="incorrect_answers"></input>
+        <label htmlFor="incorrect_answers">{answer}</label>
+      </div>
+      );
+    return newLocal;
+  }
+
   const renderAllQuestions = () => {
     return questions.results.map((question, index) => (
       <li key={index}>
-        <p>{question.question}</p>
+        <p>{question.question}</p><br></br>
+        <p>Answers:</p><br></br>
+        <input type="radio" id="correct_answer" name="answers" value="correct_answer"></input>
+        <label htmlFor="correct_answer">{question.correct_answer}</label>
+        {question.incorrect_answers.map((answer, index) => (
+          displayIncorrectAnswers(answer)
+        ))}
       </li>
     ))
   }
