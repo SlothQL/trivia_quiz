@@ -47,7 +47,7 @@ function App() {
 
   const renderAllQuestions = () => {
     return questions.results.map((question, index) => (
-      <li key={index}>
+      <li key={index} className="question-item">
         <p>{question.question}</p><br></br>
         <p>Answers:</p><br></br>
         {displayCorrectAnswer(question)}
@@ -60,7 +60,7 @@ function App() {
 
   const renderFilteredQuestions = () => {
     return searchResult.map((question, index) => (
-      <li key={index}>
+      <li key={index} className="question-item">
         <p>{question.question}</p>
         <p>Answers:</p><br></br>
         {displayCorrectAnswer(question)}
@@ -70,19 +70,21 @@ function App() {
       </li>
     ))
   }
+
   return (
     <Fragment>
       <div>
         <form value={query} onChange={event => setQuery(event.target.value)}>
+          <h4>Filter by difficulty:</h4>
           <input type="radio" id="easy" name="difficulty" value="easy"></input>
-          <label htmlFor="easy">Easy</label><br></br>
+          <label htmlFor="easy">Easy</label>
           <input type="radio" id="medium" name="difficulty" value="medium"></input>
-          <label htmlFor="medium">Medium</label><br></br>
+          <label htmlFor="medium">Medium</label>
           <input type="radio" id="hard" name="difficulty" value="hard"></input>
-          <label htmlFor="hard">Hard</label><br></br>
+          <label htmlFor="hard">Hard</label>
         </form>
       </div>
-      <ul>
+      <ul className="question-list">
         {query === '' ? renderAllQuestions() : renderFilteredQuestions()}
       </ul>
     </Fragment>
